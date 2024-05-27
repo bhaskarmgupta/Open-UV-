@@ -1,0 +1,41 @@
+<!-- index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UV Checker</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <h1>UV Checker</h1>
+    <p id="uv-index"></p>
+    <p id="sunscreen-info"></p>
+    <button id="refresh-btn">Refresh</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get user's location using Geolocation API
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        fetch(`/location?latitude=${latitude}&longitude=${longitude}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('uv-index').textContent = `UV Index: ${data.uvIndex}`;
+            document.getElementById('sunscreen-info').textContent = `Needs Sunscreen: ${data.needsSunscreen}`;
+          })
+          .catch(error => {
+            console.error('Error fetching UV data:', error.message);
+            document.getElementById('uv-index').textContent = 'Failed to fetch UV data';
+          });
+      });
+    });
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      location.reload();
+    });
+  </script>
+</body>
+</html>
