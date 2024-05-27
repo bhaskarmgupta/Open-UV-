@@ -6,6 +6,8 @@ dotenv.config();
 
 const app = express();
 const port = 3000;
+require('dotenv').config();
+
 // Define your OpenUV API key
 const OPENUV_API_KEY = 'openuv-1lfk38rlwotjwrf-io'; // Replace 'your-api-key-here' with your actual API key
 
