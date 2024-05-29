@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const port = 3000;
 // app.js
-import { OPENUV_API_KEY } from './config.js';
+const OPENUV_API_KEY=process.env.OPEN
 
 
 
